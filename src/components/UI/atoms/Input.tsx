@@ -1,3 +1,13 @@
+import styled from "styled-components";
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 15px; 
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+`;
+
 type InputProps = {
     type: string;
     name?: string;
@@ -10,7 +20,7 @@ type InputProps = {
   
   const Input = ({ type, name, id, placeholderText, value, onChangeF, onBlur }: InputProps) => {
     return (
-      <input
+      <StyledInput
         type={type}
         name={name}
         id={id}

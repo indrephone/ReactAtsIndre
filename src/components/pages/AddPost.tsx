@@ -1,8 +1,47 @@
 import { useState, useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique id generation
+import { v4 as uuidv4 } from 'uuid'; 
+import styled from 'styled-components';
 import PostsContext from '../../contexts/PostsContext';
 import UsersContext from '../../contexts/UsersContext';
 import { useNavigate } from 'react-router-dom';
+import InputField from '../UI/molecules/InputField'; 
+
+
+const FormContainer = styled.div`
+  min-height: 70vh; /* Ensures the form container takes up at least 80% of the viewport height */
+  margin-top: 80px; /* Pushes it down below the fixed header */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+`;
+
+const SubmitButton = styled.button`
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
+`;
 
 const AddPost = () => {
   const postsContext = useContext(PostsContext);
@@ -14,7 +53,7 @@ const AddPost = () => {
     image: '',
   });
 
-  const navigate = useNavigate(); // For redirecting after adding the post
+  const navigate = useNavigate(); 
 
   if (!postsContext || !usersContext || !usersContext.loggedInUser) {
     return <p>Please log in to add a post.</p>; // Show this if not logged in
@@ -34,33 +73,43 @@ const AddPost = () => {
       image: post.image,
     };
     addNewPost(newPost);
-    navigate('/feed'); // Redirect to the feed after adding the post
+    navigate('/'); // Redirect to the feed after adding the post
   };
 
   return (
-    <div>
+    <FormContainer>
       <h1>Add a New Post</h1>
-      <form onSubmit={handleSubmit}>
-        <input
+      <StyledForm onSubmit={handleSubmit}>
+        <InputField
+          text="Title"
           type="text"
-          placeholder="Title"
+          name="title"
+          id="title"
+          placeholderText="Enter the post title"
           value={post.title}
-          onChange={(e) => setPost({ ...post, title: e.target.value })}
+          onChangeF={(e) => setPost({ ...post, title: e.target.value })}
         />
-        <textarea
-          placeholder="Description"
-          value={post.description}
-          onChange={(e) => setPost({ ...post, description: e.target.value })}
-        />
-        <input
+        <InputField
+          text="Description"
           type="text"
-          placeholder="Image URL"
-          value={post.image}
-          onChange={(e) => setPost({ ...post, image: e.target.value })}
+          name="description"
+          id="description"
+          placeholderText="Enter the post description"
+          value={post.description}
+          onChangeF={(e) => setPost({ ...post, description: e.target.value })}
         />
-        <button type="submit">Add Post</button>
-      </form>
-    </div>
+        <InputField
+          text="Image URL"
+          type="text"
+          name="image"
+          id="image"
+          placeholderText="Enter the image URL"
+          value={post.image}
+          onChangeF={(e) => setPost({ ...post, image: e.target.value })}
+        />
+        <SubmitButton type="submit">Add Post</SubmitButton>
+      </StyledForm>
+    </FormContainer>
   );
 };
 

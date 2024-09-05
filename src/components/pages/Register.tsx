@@ -2,11 +2,50 @@ import { useContext, useState } from "react";
 import { v4 as generateID } from "uuid";
 import { Link,useNavigate } from "react-router-dom";
 import bcrypt from 'bcryptjs';
+import styled from "styled-components";
 
 import UsersContext, { UsersContextTypes } from "../../contexts/UsersContext";
 import Heading from "../UI/atoms/Heading";
 import InputField from "../UI/molecules/InputField";
 import Input from "../UI/atoms/Input";
+
+const FormContainer = styled.div`
+  margin-top: 120px; /* Ensures the form is pushed below the fixed MainOutlet */
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center content inside the form */
+`;
+
+// Styled form elements
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center; /* Center input fields */
+`;
+
+const SubmitButton = styled(Input)`
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 14px;
+`;
 
 type FormValues = {
   username: string;
@@ -155,10 +194,10 @@ const Register = () => {
   };
 
   return (
-    <section>
+    <FormContainer>
       <Heading text="Register" />
       {registerError && <p className="error">{registerError}</p>}
-      <form onSubmit={formSubmit}>
+      <StyledForm onSubmit={formSubmit}>
         <InputField
           text="Username:"
           type="text"
@@ -169,7 +208,7 @@ const Register = () => {
           onChangeF={handleInputChange}
           onBlur={blurHandle}
         />
-        {errorMessages.username && <p className="error">{errorMessages.username}</p>}
+        {errorMessages.username && <ErrorMessage>{errorMessages.username}</ErrorMessage>}
 
         <InputField
           text="Password:"
@@ -181,7 +220,7 @@ const Register = () => {
           onChangeF={handleInputChange}
           onBlur={blurHandle}
         />
-        {errorMessages.password && <p className="error">{errorMessages.password}</p>}
+        {errorMessages.password && <ErrorMessage>{errorMessages.password}</ErrorMessage>}
 
         <InputField
           text="Repeat Password:"
@@ -193,7 +232,7 @@ const Register = () => {
           onChangeF={handleInputChange}
           onBlur={blurHandle}
         />
-        {errorMessages.passwordRepeat && <p className="error">{errorMessages.passwordRepeat}</p>}
+        {errorMessages.passwordRepeat && <ErrorMessage>{errorMessages.passwordRepeat}</ErrorMessage>}
 
         <InputField
           text="Email:"
@@ -205,7 +244,7 @@ const Register = () => {
           onChangeF={handleInputChange}
           onBlur={blurHandle}
         />
-        {errorMessages.email && <p className="error">{errorMessages.email}</p>}
+        {errorMessages.email && <ErrorMessage >{errorMessages.email}</ErrorMessage>}
 
         <InputField
           text="Profile Picture URL:"
@@ -229,14 +268,14 @@ const Register = () => {
         />
 
 
-        {errorMessages.dob && <p className="error">{errorMessages.dob}</p>}
+        {errorMessages.dob && <ErrorMessage >{errorMessages.dob}</ErrorMessage>}
 
         <Input type="submit" value="Register" />
-      </form>
+      </StyledForm>
       <p>
-        Go <Link to="/login">Register</Link>
+        Go <Link to="/login">Login</Link>
       </p>
-    </section>
+    </FormContainer>
   );
 };
 

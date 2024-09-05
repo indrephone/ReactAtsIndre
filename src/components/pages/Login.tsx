@@ -1,11 +1,50 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import bcrypt from 'bcryptjs';
+import styled from "styled-components";
 
 import UsersContext, { UsersContextTypes } from "../../contexts/UsersContext";
 import Heading from "../UI/atoms/Heading";
 import InputField from "../UI/molecules/InputField";
 import Input from "../UI/atoms/Input";
+
+const FormContainer = styled.div`
+  margin-top: 120px; /* Ensures the form is pushed below the fixed MainOutlet */
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f9f9f9;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Center content inside the form */
+`;
+
+// Styled form elements
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center; /* Center input fields */
+`;
+
+const SubmitButton = styled(Input)`
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 14px;
+`;
 
 const Login = () => {
   const navigate = useNavigate();
@@ -39,9 +78,9 @@ const Login = () => {
   };
 
   return (
-    <section>
+    <FormContainer>
       <Heading text="Login" size={1} />
-      <form onSubmit={handleFormSubmit}>
+      <StyledForm onSubmit={handleFormSubmit}>
         <InputField
           text="Email:"
           type="email"
@@ -61,13 +100,13 @@ const Login = () => {
           onChangeF={handleInputChange}
         />
 
-        <Input type="submit" value="Login" name="login" id="login" />
-        {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-      </form>
+        <SubmitButton type="submit" value="Login" name="login" id="login" />
+        {errorMessage && <ErrorMessage style={{ color: "red" }}>{errorMessage}</ErrorMessage>}
+      </StyledForm>
       <p>
         Go <Link to="/register">Register</Link>
       </p>
-    </section>
+    </FormContainer>
   );
 };
 
