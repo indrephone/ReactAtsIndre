@@ -1,24 +1,6 @@
 {
   "users": [
     {
-      "id": "svonsoe2ece",
-      "username": "kisa",
-      "password": "123456",
-      "email": "kisa@example.com",
-      "profilePicture": "https://randomuser.me/api/portraits",
-      "dob": "2003-03-03",
-      "passwordVisible": "123456"
-    },
-    {
-      "id": "svobnoe2ece",
-      "username": "kisa1",
-      "password": "123456",
-      "email": "kisa1@example.com",
-      "profilePicture": "https://randomuser.me/api/portraits",
-      "dob": "2003-03-03",
-      "passwordVisible": "123456"
-    },
-    {
       "id": "5e5e832b-cc60-4606-9883-c63e18b6f0f2",
       "username": "grisha",
       "password": "$2a$10$BTpR2Ck/HyGIqKsLQwUuGuys7j4Nvm4ehDaVPcL6f/9LIAhXj9w9G",
