@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { v4 as generateID } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import bcrypt from 'bcryptjs';
 
 import UsersContext, { UsersContextTypes } from "../../contexts/UsersContext";
@@ -233,6 +233,9 @@ const Register = () => {
 
         <Input type="submit" value="Register" />
       </form>
+      <p>
+        Go <Link to="/login">Register</Link>
+      </p>
     </section>
   );
 };
