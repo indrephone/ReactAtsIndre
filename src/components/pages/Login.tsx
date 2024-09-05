@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { users, logInUser } = useContext(UsersContext) as UsersContextTypes;
   const [inputValues, setInputValues] = useState({
-    username: '',
+    email: '',
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState("");
@@ -27,14 +27,14 @@ const Login = () => {
     event.preventDefault();
     const foundUser = users.find(
       (user) =>
-        user.username === inputValues.username
+        user.email === inputValues.email
     );
 
     if (foundUser && bcrypt.compareSync(inputValues.password, foundUser.password)) {
       logInUser(foundUser);
       navigate("/");
     } else {
-      setErrorMessage("Invalid username or password.");
+      setErrorMessage("Invalid email or password.");
     }
   };
 
@@ -43,12 +43,12 @@ const Login = () => {
       <Heading text="Login" size={1} />
       <form onSubmit={handleFormSubmit}>
         <InputField
-          text="Username:"
-          type="text"
-          name="username"
-          id="username"
-          placeholderText="Enter your username..."
-          value={inputValues.username}
+          text="Email:"
+          type="email"
+          name="email"
+          id="email"
+          placeholderText="Enter your email..."
+          value={inputValues.email}
           onChangeF={handleInputChange}
         />
         <InputField
