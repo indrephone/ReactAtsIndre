@@ -1,4 +1,6 @@
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
+import UsersContext from "../../../contexts/UsersContext";
 import styled from "styled-components";
 
 import Logo from "../atoms/Logo";
@@ -67,6 +69,12 @@ const ButtonContainer = styled.div`
 `;
 
 const Header = () => {
+   const context = useContext(UsersContext);
+   const { loggedInUser, logOutUser } = context || { loggedInUser: null, logOutUser: () => {} };
+   const handleLogout = () => {
+      logOutUser();
+   };
+
     return ( 
         <StyledHeader>
             <LogoContainer>
@@ -81,9 +89,20 @@ const Header = () => {
             </StyledNav> 
 
             <ButtonContainer>
+              {loggedInUser ? (
+               <React.Fragment>
+                  <span>Welcome, {loggedInUser.username}</span>
+                  <button onClick={handleLogout}>Logout</button>
+               </React.Fragment>
+
+              ) : (
+               <React.Fragment>
                <button><Link to="/login">Login</Link></button> 
                <button><Link to="/register">Register</Link></button> 
-            </ButtonContainer>    
+               </React.Fragment>
+
+              )}
+              </ButtonContainer>    
 
         </StyledHeader>
      );
