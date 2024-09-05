@@ -3,14 +3,17 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { UsersProvider } from './contexts/UsersContext';
+import { PostsProvider } from './contexts/PostsContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLDivElement
 );
 root.render(
-    <BrowserRouter>
-      <UsersProvider>
+  <PostsProvider>
+     <UsersProvider>
+      <BrowserRouter>
            <App />
-      </UsersProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+     </UsersProvider>
+   </PostsProvider>
 );
