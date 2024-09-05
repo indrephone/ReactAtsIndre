@@ -1,9 +1,64 @@
 {
     "users":[
       {
-        "id": "579ad26b-a46e-4bb1-9549-c7bdf8f7fd16",
+        "id": "svonsoe2ece",
+        "username": "kisa",
+        "password": "123456",
+        "email": "kisa@example.com",
+        "profilePicture": "https://randomuser.me/api/portraits",
+        "dob": "2003-03-03",
+        "passwordVisible": "123456"
+      },
+      {
+        "id": "svobnoe2ece",
         "username": "kisa1",
-        "password": "$2a$10$xiRxh2ESg7uH7ggnIo6p/eETrhmkMy9pD2sSCtjXeYcYZ/2LL1OXy"
+        "password": "123456",
+        "email": "kisa1@example.com",
+        "profilePicture": "https://randomuser.me/api/portraits",
+        "dob": "2003-03-03",
+        "passwordVisible": "123456"
+      }
+    ],
+    "posts": [
+      {
+        "id": "vovjnslvsl1",
+        "authorId": "svonsoe2ece",
+        "dateTime": "2021-03-03",
+        "title": "Post 1",
+        "image": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus porttitor enim, laoreet viverra tortor interdum ac. Nunc a tristique turpis. Cras tincidunt ante accumsan tortor lacinia, in dignissim sapien mollis. Curabitur non convallis ipsum. Integer placerat leo et tortor condimentum tincidunt. Sed sollicitudin purus nec erat ornare, et ultricies augue pellentesque. Fusce at mauris ac nisl lacinia tempor. Quisque aliquet elementum eros, sed porta mi porta at. Maecenas non erat dapibus, lacinia elit eu, pellentesque felis. Donec ut ex mollis, lobortis enim ac, condimentum nisl."
+      },
+      {
+        "id": "vovjnslvsl2",
+        "authorId": "svonsoe2ece",
+        "dateTime": "2021-03-03",
+        "title": "Post 2",
+        "image": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus porttitor enim, laoreet viverra tortor interdum ac. Nunc a tristique turpis. Cras tincidunt ante accumsan tortor lacinia, in dignissim sapien mollis. Curabitur non convallis ipsum. Integer placerat leo et tortor condimentum tincidunt. Sed sollicitudin purus nec erat ornare, et ultricies augue pellentesque. Fusce at mauris ac nisl lacinia tempor. Quisque aliquet elementum eros, sed porta mi porta at. Maecenas non erat dapibus, lacinia elit eu, pellentesque felis. Donec ut ex mollis, lobortis enim ac, condimentum nisl."
+      },
+      {
+        "id": "vovjnslvsl3",
+        "authorId": "svonsoe2ece",
+        "dateTime": "2021-03-03",
+        "title": "Post 3",
+        "image": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus porttitor enim, laoreet viverra tortor interdum ac. Nunc a tristique turpis. Cras tincidunt ante accumsan tortor lacinia, in dignissim sapien mollis. Curabitur non convallis ipsum. Integer placerat leo et tortor condimentum tincidunt. Sed sollicitudin purus nec erat ornare, et ultricies augue pellentesque. Fusce at mauris ac nisl lacinia tempor. Quisque aliquet elementum eros, sed porta mi porta at. Maecenas non erat dapibus, lacinia elit eu, pellentesque felis. Donec ut ex mollis, lobortis enim ac, condimentum nisl."
+      },
+      {
+        "id": "vovjnslvsl4",
+        "authorId": "svonsoe2ece",
+        "dateTime": "2021-03-03",
+        "title": "Post 4",
+        "image": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus porttitor enim, laoreet viverra tortor interdum ac. Nunc a tristique turpis. Cras tincidunt ante accumsan tortor lacinia, in dignissim sapien mollis. Curabitur non convallis ipsum. Integer placerat leo et tortor condimentum tincidunt. Sed sollicitudin purus nec erat ornare, et ultricies augue pellentesque. Fusce at mauris ac nisl lacinia tempor. Quisque aliquet elementum eros, sed porta mi porta at. Maecenas non erat dapibus, lacinia elit eu, pellentesque felis. Donec ut ex mollis, lobortis enim ac, condimentum nisl."
+      },
+      {
+        "id": "vovjnslvsl5",
+        "authorId": "svonsoe2ece",
+        "dateTime": "2021-03-03",
+        "title": "Post 5",
+        "image": "https://randomuser.me/api/portraits",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus porttitor enim, laoreet viverra tortor interdum ac. Nunc a tristique turpis. Cras tincidunt ante accumsan tortor lacinia, in dignissim sapien mollis. Curabitur non convallis ipsum. Integer placerat leo et tortor condimentum tincidunt. Sed sollicitudin purus nec erat ornare, et ultricies augue pellentesque. Fusce at mauris ac nisl lacinia tempor. Quisque aliquet elementum eros, sed porta mi porta at. Maecenas non erat dapibus, lacinia elit eu, pellentesque felis. Donec ut ex mollis, lobortis enim ac, condimentum nisl."
       }
     ]
 }
