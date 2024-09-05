@@ -1,6 +1,6 @@
 import { createContext, useReducer, useEffect, useState } from "react";
 
-type ChildrenType = { children: React.ReactElement};
+type ChildrenType = { children: React.ReactNode};
 
 type UserType = {
     id: string;
@@ -21,6 +21,7 @@ export type UsersContextTypes ={
   loggedInUser: UserType | null;
   logInUser: (user: UserType) => void;
   logOutUser: () => void;
+  getSpecificUser: (id: string) => UserType | undefined;
 }
 
 const reducer = (state: UserType[], action: ReducerActionTypes) => {
@@ -69,6 +70,8 @@ const UsersProvider = ({ children }: ChildrenType) => {
           }))
       },[]); 
 
+    const getSpecificUser = (id: string) => users.find(user => user.id === id);  
+
     return (
         <UsersContext.Provider
            value={{
@@ -76,7 +79,8 @@ const UsersProvider = ({ children }: ChildrenType) => {
             addNewUser,
             loggedInUser,
             logInUser,
-            logOutUser
+            logOutUser,
+            getSpecificUser
            }}
        >
           {children}

@@ -8,12 +8,13 @@ export type PostType = {
     image: string;
     description: string;
 };
+
 type PostReducerAction =
   | { type: 'setData'; allData: PostType[] }
   | { type: 'add'; newPost: PostType }
   | { type: 'remove'; id: string };
 
-type ChildrenType = { children: React.ReactElement };
+type ChildrenType = { children: React.ReactNode };
 
 export type PostsContextTypes = {
     posts: PostType[];
@@ -21,6 +22,7 @@ export type PostsContextTypes = {
     removePost: (id: string) => void;
     getSpecificPost: (id: string) => PostType | undefined;
 };
+
 const reducer = (state: PostType[], action: PostReducerAction): PostType[] => {
     switch (action.type) {
         case 'setData':
@@ -33,6 +35,7 @@ const reducer = (state: PostType[], action: PostReducerAction): PostType[] => {
             return state;
     }
 };
+
 const PostsContext = createContext<PostsContextTypes | undefined>(undefined);
 
 const PostsProvider = ({ children }: ChildrenType) => {
@@ -80,12 +83,12 @@ const PostsProvider = ({ children }: ChildrenType) => {
     useEffect(() => {
         fetch(`http://localhost:8080/posts`)
             .then((res) => res.json())
-            .then((data: PostType[]) =>
+            .then((data: PostType[]) => {
                 dispatch({
                     type: 'setData',
                     allData: data,
-                })
-            )
+                });
+            })
             .catch((error) => {
                 console.error('Error fetching posts:', error);
             });
