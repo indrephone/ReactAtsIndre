@@ -64,7 +64,7 @@ const Home = () => {
   const usersContext = useContext(UsersContext);
 
   if (!postsContext || !usersContext) {
-    return <p>Loading...</p>;
+    return <img src="/BeanEaterLoading.gif" alt="Loading..." />
   }
 
   const { posts, removePost } = postsContext;

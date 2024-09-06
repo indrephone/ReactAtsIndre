@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 import Logo from "../atoms/Logo";
 
-
 const StyledHeader = styled.header`
    display: flex;
    align-items: center;
@@ -40,10 +39,11 @@ const StyledNav = styled.nav`
        a{
         text-decoration: none;
         color: inherit;
-      }
-       &:hover{
+      
+         &:hover{
         color: #e96a0f;
-       }
+        }
+      }
 `;
 const ButtonContainer = styled.div`
   display: flex;

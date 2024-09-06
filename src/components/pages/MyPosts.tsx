@@ -43,8 +43,12 @@ const MyPosts = () => {
   const postsContext = useContext(PostsContext);
   const usersContext = useContext(UsersContext);
 
-  if (!postsContext || !usersContext || !usersContext.loggedInUser) {
-    return <p>Please log in to view your posts.</p>; // Show fallback if not logged in
+  if (!postsContext || !usersContext ) {
+    return <img src="/BeanEaterLoading.gif" alt="Loading..." />
+  }
+
+  if (!usersContext.loggedInUser){
+    return <p>Please log in to view your posts.</p>;
   }
 
   const { posts, removePost } = postsContext;
