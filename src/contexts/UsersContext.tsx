@@ -43,19 +43,22 @@ const UsersProvider = ({ children }: ChildrenType) => {
 
     const [loggedInUser, setLoggedInUser] = useState<UserType|null>(null);
 
-    const logInUser = (user:UserType) => {
-   
-   const storedFavorites = JSON.parse(
-         localStorage.getItem("favoritePosts") || "[]"
+    const logInUser = (user: UserType) => {
+      const storedFavorites = JSON.parse(
+        localStorage.getItem("favoritePosts") || "[]"
       );
-
-
-        setLoggedInUser({
-          ...user,
-          favoritePosts:
+      
+      const updatedUser = {
+        ...user,
+        favoritePosts:
           storedFavorites.length > 0 ? storedFavorites : user.favoritePosts || [],
-        });
-        };
+      };
+    
+      // Save loggedInUser to both state and localStorage
+      setLoggedInUser(updatedUser);
+      localStorage.setItem("loggedInUser", JSON.stringify(updatedUser)); // Persist to localStorage
+    };
+    
 
     // Add a post to the user's favorites and save it in localStorage
   const addFavoritePost = (postId: string) => {
@@ -93,14 +96,21 @@ const UsersProvider = ({ children }: ChildrenType) => {
       
       const [users, dispatch] = useReducer(reducer, []);
 
-      useEffect(()=>{
+      useEffect(() => {
+        const storedUser = localStorage.getItem("loggedInUser");
+        if (storedUser) {
+          setLoggedInUser(JSON.parse(storedUser)); // Rehydrate logged-in user from localStorage
+        }
         fetch(`http://localhost:8080/users`)
-          .then(res => res.json())
-          .then(data => dispatch({
-            type: 'setData',
-            data: data
-          }))
-      },[]); 
+          .then((res) => res.json())
+          .then((data) =>
+            dispatch({
+              type: "setData",
+              data: data,
+            })
+          );
+      }, []);
+      
 
       const addNewUser = (newUser: UserType) => {
         fetch(`http://localhost:8080/users`, {

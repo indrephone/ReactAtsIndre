@@ -73,6 +73,8 @@ const AddPost = () => {
       image: post.image,
     };
     addNewPost(newPost);
+    console.log('After post:', loggedInUser);
+
     navigate('/'); // Redirect to the feed after adding the post
   };
 

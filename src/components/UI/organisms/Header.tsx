@@ -103,6 +103,7 @@ const Header = () => {
                 <ul>
                    <li><NavLink to="/">Home</NavLink></li>
                    <li><NavLink to="/my-posts">My Posts</NavLink></li>
+                   <li><NavLink to="/favorite-posts">Favorite Posts</NavLink></li>
                 </ul>
             </StyledNav> 
 
