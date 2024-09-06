@@ -71,7 +71,7 @@ const Login = () => {
 
     if (foundUser && bcrypt.compareSync(inputValues.password, foundUser.password)) {
       logInUser(foundUser);
-      navigate("/");
+      navigate("/favorite-posts");
     } else {
       setErrorMessage("Invalid email or password.");
     }

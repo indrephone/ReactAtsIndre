@@ -5,7 +5,8 @@ import MainOutlet from './components/outlets/MainOutlet';
 import Home from './components/pages/Home';
 import AddPost from './components/pages/AddPost';
 import MyPosts from './components/pages/MyPosts';
-import ProtectedRoute from './protection/ProtectedRoute'; // Update path if necessary
+import FavoritePosts from './components/pages/FavoritePosts';
+import ProtectedRoute from './protection/ProtectedRoute'; 
 
 const App = () => {
   return (
@@ -34,6 +35,14 @@ const App = () => {
               </ProtectedRoute>
             }
           />
+          <Route
+             path="favorite-posts"
+             element={
+               <ProtectedRoute>
+                  <FavoritePosts />
+               </ProtectedRoute>
+             }
+           />  
         </Route>
       </Routes>
     </>

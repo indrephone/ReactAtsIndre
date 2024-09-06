@@ -190,7 +190,7 @@ const Register = () => {
     // Add the new user and log them in
     addNewUser(newUser);
     logInUser(newUser);
-    navigate("/");
+    navigate("/favorite-posts");
   };
 
   return (
