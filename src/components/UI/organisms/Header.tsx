@@ -102,6 +102,7 @@ const Header = () => {
             <StyledNav>
                 <ul>
                    <li><NavLink to="/">Home</NavLink></li>
+                   <li><NavLink to="/my-posts">My Posts</NavLink></li>
                 </ul>
             </StyledNav> 
 
