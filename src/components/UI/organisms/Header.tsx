@@ -67,6 +67,23 @@ const ButtonContainer = styled.div`
     }
   }
 `;
+const UserProfile = styled.div`
+   display: flex;
+   align-items: center;
+   gap: 10px;
+
+   img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+   }
+
+   span {
+      font-size: 1rem;
+      color: #333;
+   }
+`;
 
 const Header = () => {
    const context = useContext(UsersContext);
@@ -91,7 +108,10 @@ const Header = () => {
             <ButtonContainer>
               {loggedInUser ? (
                <React.Fragment>
-                  <span>Welcome, {loggedInUser.username}</span>
+                  <UserProfile>
+                  <img src={loggedInUser.profilePicture} alt="Profile" /> 
+                    <span>Welcome, {loggedInUser.username}</span>
+                  </UserProfile>
                   <button onClick={handleLogout}>Logout</button>
                </React.Fragment>
 
