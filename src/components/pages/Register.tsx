@@ -274,6 +274,7 @@ const Register = () => {
       </StyledForm>
       <p>
         Go <Link to="/login">Login</Link>
+        Go <Link to="/">Home</Link>
       </p>
     </FormContainer>
   );
