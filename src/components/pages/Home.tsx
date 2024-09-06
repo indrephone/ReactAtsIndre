@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import PostsContext from '../../contexts/PostsContext';
@@ -68,7 +69,7 @@ const Home = () => {
   }
 
   const { posts, removePost } = postsContext;
-  const { loggedInUser } = usersContext;
+  const { loggedInUser, addFavoritePost, removeFavoritePost } = usersContext;
 
   // Function to get the user by authorId
   const getUserById = (id: string) => usersContext.users.find((user) => user.id === id);
@@ -77,6 +78,7 @@ const Home = () => {
   const handleDelete = (postId: string) => {
     removePost(postId);
   };
+  
 
   return (
     <StyledHomeContainer>
@@ -92,6 +94,8 @@ const Home = () => {
       <ul>
         {posts.map((post) => {
           const creatorUser = getUserById(post.authorId);
+          const isFavorite = loggedInUser?.favoritePosts.includes(post.id);
+
 
           return (
             <StyledPost key={post.id}>
@@ -101,6 +105,22 @@ const Home = () => {
               {post.image && (
                 <PostImage src={post.image} alt={post.title} />
               )}
+              
+              {isFavorite ? (
+            <AiFillHeart
+               onClick={() => loggedInUser && removeFavoritePost(post.id)}
+               size={24}
+               style={{ cursor: loggedInUser ? 'pointer' : 'not-allowed' }}
+             />
+             ) : (
+            <AiOutlineHeart
+                onClick={() => loggedInUser && addFavoritePost(post.id)} 
+                size={24}
+                style={{ cursor: loggedInUser ? 'pointer' : 'not-allowed' }}
+             />
+              )}
+
+
               {loggedInUser?.id === post.authorId && (
                 <DeleteButton onClick={() => handleDelete(post.id)}>
                   Delete Post

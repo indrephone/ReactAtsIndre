@@ -26,6 +26,16 @@
       "profilePicture": "https://cdn.pixabay.com/photo/2023/06/15/21/12/pomeranian-8066558_1280.png",
       "dob": "2024-07-03",
       "passwordVisible": "gosha33"
+    },
+    {
+      "id": "7d39fbe3-1a4b-4777-9153-3f0e4cf46bee",
+      "username": "Bobas",
+      "password": "$2a$10$BIg6uJpGytl6bGoRSIw9bOZcAWipc7KGYtKsFKJ5JasFr1tsaadUS",
+      "email": "bob@bob.com",
+      "profilePicture": "https://cdn.pixabay.com/photo/2017/09/28/10/05/dachshund-2794944_1280.jpg",
+      "dob": "2024-08-07",
+      "passwordVisible": "123456",
+      "favoritePosts": []
     }
   ],
   "posts": [

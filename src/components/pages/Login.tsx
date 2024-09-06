@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+
 import bcrypt from 'bcryptjs';
 import styled from "styled-components";
 
-import UsersContext, { UsersContextTypes } from "../../contexts/UsersContext";
+import UsersContext, { UsersContextTypes, UserType } from "../../contexts/UsersContext";
 import Heading from "../UI/atoms/Heading";
 import InputField from "../UI/molecules/InputField";
 import Input from "../UI/atoms/Input";
@@ -62,20 +63,48 @@ const Login = () => {
     });
   };
 
-  const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const foundUser = users.find(
-      (user) =>
-        user.email === inputValues.email
-    );
-
-    if (foundUser && bcrypt.compareSync(inputValues.password, foundUser.password)) {
-      logInUser(foundUser);
-      navigate("/favorite-posts");
-    } else {
-      setErrorMessage("Invalid email or password.");
+  const loadUsers = async () => {
+    try {
+      const response = await fetch("/data.json"); // Ensure the data.json is in your public folder
+      const data = await response.json();
+      if (data && data.users) {
+        return data.users;
+      } else {
+        throw new Error('Users not found in response');
+      }
+    } catch (error) {
+      console.error("Failed to load users:", error);
+      return []; // Return an empty array to avoid undefined issues
     }
   };
+  
+     
+    const handleFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const users = await loadUsers(); // Load users from data.json
+      const foundUser = users.find(
+        (user: UserType) => user.email === inputValues.email
+      );
+    
+      if (foundUser && bcrypt.compareSync(inputValues.password, foundUser.password)) {
+        // Retrieve stored favoritePosts from localStorage
+        const storedFavorites = JSON.parse(localStorage.getItem('favoritePosts') || '[]');
+    
+        // Update foundUser with favoritePosts from localStorage
+        const updatedUser = {
+          ...foundUser,
+          favoritePosts: storedFavorites.length > 0 ? storedFavorites : foundUser.favoritePosts || []
+        };
+    
+        // Log in the updated user, not the foundUser
+        logInUser(updatedUser); 
+        navigate("/favorite-posts");
+      } else {
+        setErrorMessage("Invalid email or password.");
+      }
+    };
+    
+  
 
   return (
     <FormContainer>

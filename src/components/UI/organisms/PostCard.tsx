@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import styled from "styled-components";
 import UsersContext from "../../../contexts/UsersContext";
 import PostsContext, { PostType } from "../../../contexts/PostsContext";
@@ -34,7 +33,7 @@ const PostCard = ({ data }: Props) => {
     return null;
   }
 
-  const { getSpecificUser, loggedInUser } = usersContext;
+  const { getSpecificUser, loggedInUser} = usersContext;
   const { removePost } = postsContext;
   const thisUser = getSpecificUser(data.authorId);
 
@@ -46,6 +45,8 @@ const PostCard = ({ data }: Props) => {
       <h3>{data.title}</h3>
 
       <p>{data.description.slice(0, 100)}</p>
+
+
       {loggedInUser && loggedInUser.id === data.authorId && (
         <button onClick={() => removePost(data.id)}>
           Delete

@@ -185,6 +185,7 @@ const Register = () => {
       passwordVisible: inputValues.password, // Temporarily store plain password
       password: bcrypt.hashSync(inputValues.password, 10), // Hashed password
       profilePicture: inputValues.profilePicture || 'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg', // Default profile picture
+      favoritePosts: [],
     };
 
     // Add the new user and log them in

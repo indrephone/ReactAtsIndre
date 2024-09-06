@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect, useState } from "react";
 
 type ChildrenType = { children: React.ReactNode};
 
-type UserType = {
+export type UserType = {
     id: string;
     username: string;
     password: string;
@@ -42,14 +42,66 @@ const UsersContext = createContext<UsersContextTypes | undefined >(undefined);
 const UsersProvider = ({ children }: ChildrenType) => {
 
     const [loggedInUser, setLoggedInUser] = useState<UserType|null>(null);
+
     const logInUser = (user:UserType) => {
-        setLoggedInUser(user);
-      }
+   
+   const storedFavorites = JSON.parse(
+         localStorage.getItem("favoritePosts") || "[]"
+      );
+
+
+        setLoggedInUser({
+          ...user,
+          favoritePosts:
+          storedFavorites.length > 0 ? storedFavorites : user.favoritePosts || [],
+        });
+        };
+
+    // Add a post to the user's favorites and save it in localStorage
+  const addFavoritePost = (postId: string) => {
+    if (loggedInUser) {
+      const updatedFavorites = [...loggedInUser.favoritePosts, postId];
+      const updatedUser = {
+        ...loggedInUser,
+        favoritePosts: updatedFavorites,
+      };
+      setLoggedInUser(updatedUser);
+      localStorage.setItem("favoritePosts", JSON.stringify(updatedFavorites)); // Persist to localStorage
+    }
+  };
+
+  // Remove a post from the user's favorites and update localStorage
+  const removeFavoritePost = (postId: string) => {
+    if (loggedInUser) {
+      const updatedFavorites = loggedInUser.favoritePosts.filter(
+        (id) => id !== postId
+      );
+      const updatedUser = {
+        ...loggedInUser,
+        favoritePosts: updatedFavorites,
+      };
+      setLoggedInUser(updatedUser);
+      localStorage.setItem("favoritePosts", JSON.stringify(updatedFavorites)); // Persist to localStorage
+    }
+  };
+
+     // Log out the user and clear favorite posts from localStorage if desired 
     const logOutUser = () => {
         setLoggedInUser(null);
+        localStorage.removeItem("favoritePosts"); // Optional: Clear favorite posts from localStorage on logout
       }
       
       const [users, dispatch] = useReducer(reducer, []);
+
+      useEffect(()=>{
+        fetch(`http://localhost:8080/users`)
+          .then(res => res.json())
+          .then(data => dispatch({
+            type: 'setData',
+            data: data
+          }))
+      },[]); 
+
       const addNewUser = (newUser: UserType) => {
         fetch(`http://localhost:8080/users`, {
           method: "POST",
@@ -64,37 +116,7 @@ const UsersProvider = ({ children }: ChildrenType) => {
         })
       }
 
-      useEffect(()=>{
-        fetch(`http://localhost:8080/users`)
-          .then(res => res.json())
-          .then(data => dispatch({
-            type: 'setData',
-            data: data
-          }))
-      },[]); 
-
-    const getSpecificUser = (id: string) => users.find(user => user.id === id);  
-
-    const addFavoritePost = (postId: string) => {
-      if (loggedInUser) {
-        const updatedUser = {
-          ...loggedInUser,
-          favoritePosts: [...loggedInUser.favoritePosts, postId],
-        };
-        setLoggedInUser(updatedUser);
-      }
-    };
-    
-    const removeFavoritePost = (postId: string) => {
-      if (loggedInUser) {
-        const updatedUser = {
-          ...loggedInUser,
-          favoritePosts: loggedInUser.favoritePosts.filter(id => id !== postId),
-        };
-        setLoggedInUser(updatedUser);
-      }
-    };
-     
+ const getSpecificUser = (id: string) => users.find(user => user.id === id);  
 
     return (
         <UsersContext.Provider
