@@ -10,6 +10,7 @@ type UserType = {
     profilePicture: string;
     dob: string;
     passwordVisible: string;
+    favoritePosts: string[];
 };
 type ReducerActionTypes = 
 { type: "setData", data: UserType[] } |
@@ -22,6 +23,8 @@ export type UsersContextTypes ={
   logInUser: (user: UserType) => void;
   logOutUser: () => void;
   getSpecificUser: (id: string) => UserType | undefined;
+  addFavoritePost: (postId: string) => void;
+  removeFavoritePost: (postId: string) => void;
 }
 
 const reducer = (state: UserType[], action: ReducerActionTypes) => {
@@ -72,6 +75,27 @@ const UsersProvider = ({ children }: ChildrenType) => {
 
     const getSpecificUser = (id: string) => users.find(user => user.id === id);  
 
+    const addFavoritePost = (postId: string) => {
+      if (loggedInUser) {
+        const updatedUser = {
+          ...loggedInUser,
+          favoritePosts: [...loggedInUser.favoritePosts, postId],
+        };
+        setLoggedInUser(updatedUser);
+      }
+    };
+    
+    const removeFavoritePost = (postId: string) => {
+      if (loggedInUser) {
+        const updatedUser = {
+          ...loggedInUser,
+          favoritePosts: loggedInUser.favoritePosts.filter(id => id !== postId),
+        };
+        setLoggedInUser(updatedUser);
+      }
+    };
+     
+
     return (
         <UsersContext.Provider
            value={{
@@ -80,7 +104,9 @@ const UsersProvider = ({ children }: ChildrenType) => {
             loggedInUser,
             logInUser,
             logOutUser,
-            getSpecificUser
+            getSpecificUser,
+            addFavoritePost,
+            removeFavoritePost,
            }}
        >
           {children}
